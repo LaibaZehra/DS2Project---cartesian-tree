@@ -65,6 +65,21 @@ class CartesianTree:
             new_node = new_node.parent
 
 
-
+    def find(self,value):
+        print(self.find_value(self.root,value))
+    def find_value(self,root, value):
+        if root is None:
+            return None
+        if root.val == value:
+            return root
+        if root.left is not None and root.left.val <= value:
+            result = self.find_value(root.left, value)
+            if result is not None:
+                return result
+        if root.right is not None and root.right.val <= value:
+            result = self.find_value(root.right, value)
+            if result is not None:
+                return result
+        return None
         
 
