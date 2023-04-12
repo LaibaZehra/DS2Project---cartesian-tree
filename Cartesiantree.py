@@ -1,14 +1,12 @@
-import math
 class Node:
-    def __init__(self,val,left = None,right = None) -> None:
+    def __init__(self,val,left = None,right = None,parent=None) -> None:
         self.val = val
         self.left = left
         self.right = right
-
-
+        self.parent=parent
 class CartesianTree:
     def __init__(self,lst,start,end) -> None:
-        self.root = self.constructree(lst,start,end)
+        self.root = self.constructree(lst,start,end,None)
         if not lst:
             return None
     def minimumelement(self,lst,start,end):
@@ -17,56 +15,19 @@ class CartesianTree:
             if lst[min] > lst[i]:
                 min = i
         return min
-    def display(self,root):
-        if root is None:
-            return
-        self.display(root.left)
-        print(root.val)
-        self.display(root.right)
-    def constructree(self,inorder,start,end):
+    def constructree(self,inorder,start,end,parent):
         if start > end:
             return None
+        
         index = self.minimumelement(inorder,start,end)
         root = Node(inorder[index])
-        root.left = self.constructree(inorder,start,index-1)
-        root.right = self.constructree(inorder,index + 1,end)
+        root.parent=parent
+        root.left = self.constructree(inorder,start,index-1,root)
+        root.right = self.constructree(inorder,index + 1,end,root)
+       
         return root
-
-
-    def insert(self, value):
-        # create a new node with the given value
-        new_node = Node(value)
-        
-        # if the tree is empty, make the new node the root of the tree
-        if self.root is None:
-            self.root = new_node
-            return
-        
-        # find the last node on the rightmost path whose value is less than the new node's value
-        parent = None
-        current = self.root
-        while current is not None and current.val <= new_node.val:
-            parent = current
-            current = current.right
-            
-        # make the new node the right child of the parent node
-        new_node.parent = parent
-        new_node.right = current
-        if parent is None:
-            self.root = new_node
-        else:
-            parent.right = new_node
-        
-        # fix the Cartesian tree properties
-        while new_node.parent is not None and new_node.parent.val > new_node.val:
-            # swap the values of the new node and its parent
-            new_node.parent.val, new_node.val = new_node.val, new_node.parent.val
-            # move up to the parent node
-            new_node = new_node.parent
-
-
     def find(self,value):
-        print(self.find_value(self.root,value))
+        return(self.find_value(self.root,value))
     def find_value(self,root, value):
         if root is None:
             return None
@@ -81,5 +42,43 @@ class CartesianTree:
             if result is not None:
                 return result
         return None
-        
-
+    def find_successor(self, node):
+        if node.right.val< node.left.val:
+            return node.right
+        else:
+            return node.left
+    def delete(self, value):
+        node = self.find(value)
+        if node is None:
+            return
+        if node.left is not None and node.right is not None:
+            successor = self.find_successor(node)
+            node.val, successor.val = successor.val, node.val
+            node = successor
+        if node.left is not None:
+            child = node.left
+        else:
+            child = node.right
+            
+        if child is not None:
+            child.parent = node.parent
+            
+        if node.parent is None:
+            self.root = child
+        elif node == node.parent.left:
+            node.parent.left = child
+        else:
+            node.parent.right = child
+        while child is not None:
+            parent = child.parent
+            if parent is None:
+                break
+            
+            if parent.val < child.val:
+                parent.val, child.val = child.val, parent.val
+                child = parent
+            else:
+                break
+   
+car = CartesianTree([4,1,8,2,5],0,4)
+car.delete(2)
