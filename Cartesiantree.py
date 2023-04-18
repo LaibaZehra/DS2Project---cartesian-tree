@@ -95,12 +95,12 @@ class CartesianTree:
         self._inorder(node.right, result)
 
 # create the Cartesian tree
-car = CartesianTree([4, 1, 8, 2, 5], 0, 4)
+# car = CartesianTree([4, 1, 8, 2, 5], 0, 4)
 
-# test find method
-print(car.find(4))  # output: 
-print(car.find(10))  # output: None
+# # test find method
+# print(car.find(4))  # output: 
+# print(car.find(10))  # output: None
 
-# test delete method
-car.delete(8)
-print(car.inorder())  # output: [1, 2, 4, 5]
+# # test delete method
+# car.delete(8)
+# print(car.inorder())  # output: [1, 2, 4, 5]
