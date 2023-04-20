@@ -10,11 +10,13 @@ class CartesianTree:
         if not lst:
             return None
     def minimumelement(self,lst,start,end):
-        min = start
-        for i in range(start + 1 , end + 1):
-            if lst[min] > lst[i]:
-                min = i
-        return min
+        # min = start
+        # for i in range(start + 1 , end + 1):
+        #     if lst[min] > lst[i]:
+        #         min = i
+        # return min
+        return start + lst[start:end+1].index(min(lst[start:end+1]))
+
     def constructree(self,inorder,start,end,parent):
         if start > end:
             return None
@@ -47,6 +49,7 @@ class CartesianTree:
             return node.right
         else:
             return node.left
+
     def delete(self, value):
         node = self.find(value)
         if node is None:
@@ -79,6 +82,25 @@ class CartesianTree:
                 child = parent
             else:
                 break
-   
-car = CartesianTree([4,1,8,2,5],0,4)
-car.delete(2)
+    def inorder(self):
+        result = []
+        self._inorder(self.root, result)
+        return result
+    def _inorder(self, node, result):
+        if node is None:
+            return
+        self._inorder(node.left, result)
+        result.append(node.val)
+        # print(result)
+        self._inorder(node.right, result)
+
+# create the Cartesian tree
+# car = CartesianTree([4, 1, 8, 2, 5], 0, 4)
+
+# # test find method
+# print(car.find(4))  # output: 
+# print(car.find(10))  # output: None
+
+# # test delete method
+# car.delete(8)
+# print(car.inorder())  # output: [1, 2, 4, 5]
