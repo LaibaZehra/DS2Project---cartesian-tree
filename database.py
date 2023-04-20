@@ -20,8 +20,9 @@ class Table(object):
         Returns:
         None
         '''
+        self.records={}
         self.keys = []
-        self.index = CartesianTree(self.keys,0,len(self.keys)-1)       
+        self.index = CartesianTree(self.keys,0,len(self.keys)-1,self.records)       
         
 
 
@@ -40,20 +41,22 @@ class Table(object):
         key1 = choice[key]
         input_lines = open(csvfile,encoding='utf-8').readlines()
         self.header = None
-        self.records = {}
         reader = csv.reader(input_lines)
         for i,row in enumerate(reader):
             if i == 0:
                 self.header = row
                 continue
             if key1 == 0:
-                self.records[i] = row[1:]
-                self.keys.append(i)
+                self.records[row[0]] = row[1:]
+                self.keys.append(row[0])
             elif key1 == 4:
-                self.records[int(row[4])] = row[:3]
+                self.records[int(row[4])] = row[:4]
                 self.keys.append(int(row[4]))
         print(self.keys)
-        return self.keys
+        return self.records
 
-data = Table()
-data.read('data/books.csv','pages')
+# data = Table()
+# value=data.read('data/books.csv','serial')
+# for i in value:
+
+# print(value)

@@ -1,28 +1,31 @@
+
 class Node:
-    def __init__(self,val,left = None,right = None,parent=None) -> None:
+    def __init__(self,val,data,left = None,right = None,parent=None) -> None:
         self.val = val
         self.left = left
         self.right = right
         self.parent=parent
+        self.data=data
 class CartesianTree:
-    def __init__(self,lst,start,end) -> None:
+    def __init__(self,lst,start,end,data) -> None:
+        self.dic=data
         self.root = self.constructree(lst,start,end,None)
         if not lst:
             return None
-    def minimumelement(self,lst,start,end):
-        # min = start
-        # for i in range(start + 1 , end + 1):
-        #     if lst[min] > lst[i]:
-        #         min = i
-        # return min
-        return start + lst[start:end+1].index(min(lst[start:end+1]))
+    def minimumelement(self,lst, start, end):
+        min_idx = start
+        for i in range(start + 1, end + 1):
+            if lst[min_idx] > lst[i]:
+                min_idx = i
+        return min_idx
+        # return start + lst[start:end+1].index(min(lst[start:end+1]))
 
     def constructree(self,inorder,start,end,parent):
         if start > end:
             return None
         
         index = self.minimumelement(inorder,start,end)
-        root = Node(inorder[index])
+        root = Node(inorder[index],self.dic[inorder[index]])
         root.parent=parent
         root.left = self.constructree(inorder,start,index-1,root)
         root.right = self.constructree(inorder,index + 1,end,root)
@@ -83,20 +86,23 @@ class CartesianTree:
             else:
                 break
     def inorder(self):
-        result = []
+        result = {}
         self._inorder(self.root, result)
         return result
     def _inorder(self, node, result):
         if node is None:
             return
         self._inorder(node.left, result)
-        result.append(node.val)
+        
+        result[node.val]=node.data
         # print(result)
         self._inorder(node.right, result)
 
 # create the Cartesian tree
-# car = CartesianTree([4, 1, 8, 2, 5], 0, 4)
-
+# dic={1:['aplha'],2:["fnbr"],4:["po"],5:["uy"],8:["tc"]}
+# car = CartesianTree([4, 1, 8, 2, 5], 0, 4,dic)
+# val=car.inorder()
+# print(val)
 # # test find method
 # print(car.find(4))  # output: 
 # print(car.find(10))  # output: None
