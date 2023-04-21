@@ -105,6 +105,42 @@ class CartesianTree:
         # print(result)
         self._inorder(node.right, result)
 
+     
+    def insert(self, value, lst):
+        # create a new node with the given value
+        new_node = Node(value,lst)
+     
+        
+        
+        # if the tree is empty, make the new node the root of the tree
+        if self.root is None:
+            self.root = new_node
+            return
+        
+        # find the last node on the rightmost path whose value is less than the new node's value
+        parent = None
+        current = self.root
+        while current is not None and current.val <= new_node.val:
+            parent = current
+            current = current.right
+            
+        # make the new node the right child of the parent node
+        new_node.parent = parent
+        new_node.right = current
+        if parent is None:
+            self.root = new_node
+        else:
+            parent.right = new_node
+        
+        # fix the Cartesian tree properties
+        while new_node.parent is not None and new_node.parent.val > new_node.val:
+            # swap the values of the new node and its parent
+            new_node.parent.val, new_node.val = new_node.val, new_node.parent.val
+            # move up to the parent node
+            new_node = new_node.parent
+        print("Insertion complete")
+
+
 # create the Cartesian tree
 # dic={1:['aplha'],2:["fnbr"],4:["po"],5:["uy"],8:["tc"]}
 # car = CartesianTree([4, 1, 8, 2, 5], 0, 4,dic)

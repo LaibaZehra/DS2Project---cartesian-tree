@@ -1,4 +1,3 @@
-
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
@@ -20,13 +19,14 @@ window.rowconfigure(0, weight=1)
 window.columnconfigure(0, weight=1)
 
 
-frame1 = tk.Frame(window)
+
 frame1 = tk.Frame(window)
 frame2 = tk.Frame(window)
 frame3 = tk.Frame(window) # search and delete
+frame4 = tk.Frame(window) #insert
 
 
-for frame in (frame1, frame2, frame3):
+for frame in (frame1, frame2, frame3,frame4):
     frame.grid(row=0,column=0,sticky='nsew')
 #==================Frame 2 code
 def view1():
@@ -38,7 +38,7 @@ def view1():
     s=ttk.Style(frame2)
     count=0
     for i in lst:
-        tree.insert('',count,text="",values=(i,value[i][0],value[i][1],value[i][2],value[i][3]))
+        tree.insert('',count,text="",values=(i,lst[i][0],lst[i][1],lst[i][2],lst[i][3]))
         count+=1
     frame2_btn = tk.Button(frame2, text='Wapsi',command=lambda:[show_frame(frame1),delete()])
     frame2_btn.pack(fill='x', ipady=15)
@@ -87,13 +87,17 @@ isbn_input=Entry(frame1,width=50)#text input on screen
 isbn_input.pack(ipady=4,pady=(10,5)) #ipady for height
 isbn_input.place(x=600,y=200)
 
-
 frame1_btn = tk.Button(frame1, text='View',fg="black",bg="PaleTurquoise",font=('Times New Roman',24,'bold'),command=lambda:[show_frame(frame2),view1()])
 frame1_btn.pack(ipady=15)
 frame1_btn.place(x=600,y=300)
+
 search_btn = tk.Button(frame1, text='Search',fg="black",bg="PaleTurquoise",font=('Times New Roman',24,'bold'),command=lambda:show_frame(frame3))
 search_btn.pack(ipady=15)
 search_btn.place(x=600,y=600)
+
+insert_btn = tk.Button(frame1, text='Insert',fg="black",bg="PaleTurquoise",font=('Times New Roman',24,'bold'),command=lambda:show_frame(frame4))
+insert_btn.pack(ipady=15)
+insert_btn.place(x=600,y=400)
 
 
 window.title('Fries Management System') # heading of the window
@@ -102,7 +106,9 @@ window.iconbitmap('icon.ico') #icon of the window
 #==================Frame 3 code
 def search_func():
     value=search_input.get()
+    print("New Key: ",value)
     ans=cat.search(value)
+    
     tree1=ttk.Treeview(frame3)
     s1=ttk.Style(frame3)
     count=0
@@ -153,6 +159,64 @@ s_btn.place(x=200,y=500)
 back_btn = tk.Button(frame3, text='Back',command=lambda:show_frame(frame1))
 back_btn.pack(fill='x', ipady=15)
 back_btn.place(x=1000,y=500)
+
+
+#==================Frame 4 code
+
+def insert_func():
+    print("hi")
+    isbn = isbn_input.get()
+    book = book_input.get()
+    genre = genre_input.get()
+    pgno = pgno_input.get()
+    price = price_input.get()
+  
+
+    lst=[book,genre,price,pgno]
+    print(lst)
+
+    insertion = cat.insert(isbn, lst)
+   
+
+    pass
+
+Insert=Label(frame4,text='INSERT',fg='black',bg='#fff0f5')
+Insert.pack(pady=(20,5))
+Insert.config(font=('veranda',15))
+
+ISBN = Label(frame4,text='  ISBN',fg='black',bg='#fff0f5',font=('Times New Roman',20,'bold')).place(x=350,y=58)
+ISBN_input=Entry(frame4,width=50)#text input on screen
+ISBN_input.pack(ipady=4,pady=(10,5)) #ipady for height
+
+book = Label(frame4,text='Book Name',fg='black',bg='#fff0f5',font=('Times New Roman',20,'bold')).place(x=330,y=98)
+book_input=Entry(frame4,width=50)#text input on screen
+book_input.pack(ipady=4,pady=(10,5)) #ipady for height
+
+genre = Label(frame4,text='Genre',fg='black',bg='#fff0f5',font=('Times New Roman',20,'bold')).place(x=350,y=138)
+genre_input=Entry(frame4,width=50)#text input on screen
+genre_input.pack(ipady=4,pady=(10,5)) #ipady for height
+
+pgno = Label(frame4,text='Page Number',fg='black',bg='#fff0f5',font=('Times New Roman',20,'bold')).place(x=320,y=178)
+pgno_input=Entry(frame4,width=50)#text input on screen
+pgno_input.pack(ipady=4,pady=(10,5)) #ipady for height
+
+price = Label(frame4,text='Price',fg='black',bg='#fff0f5',font=('Times New Roman',20,'bold')).place(x=350,y=224)
+price_input=Entry(frame4,width=50)#text input on screen
+price_input.pack(ipady=4,pady=(10,5)) #ipady for height
+
+
+
+
+
+i_btn = tk.Button(frame4, text='INSERT',font=('Times New Roman',20,'bold'),command=insert_func)
+i_btn.pack(ipady=10)
+i_btn.place(x=500,y=500)
+
+
+frame4_btn = tk.Button(frame4, text='Wapsi',command=lambda:show_frame(frame1))
+frame4_btn.pack(fill='x', ipady=15)
+
+
 
 
 
