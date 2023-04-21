@@ -185,3 +185,4 @@ back_btn.place(x=1000,y=500)
 # insert.pack(pady=(20,5))
 show_frame(frame1)
 window.mainloop()
+#yeh raha
