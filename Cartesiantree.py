@@ -33,6 +33,13 @@ class CartesianTree:
         return root
     def find(self,value):
         return(self.find_value(self.root,value))
+
+    def search(self,value):
+        if value!=None:
+            ans=self.find(value)
+            return ans.data
+        return None
+    
     def find_value(self,root, value):
         if root is None:
             return None
