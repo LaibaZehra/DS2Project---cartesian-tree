@@ -248,9 +248,4 @@ frame4_btn.pack(fill='x', ipady=15)
 # insert=Button(root,width=20)
 # insert.pack(pady=(20,5))
 show_frame(frame1)
-<<<<<<< HEAD
 window.mainloop()
-=======
-window.mainloop()
-#yeh raha
->>>>>>> fec7df04603d7ce0c359408a89a28b1a32f22953
