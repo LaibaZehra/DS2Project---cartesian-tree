@@ -184,9 +184,9 @@ Insert=Label(frame4,text='INSERT',fg='black',bg='#fff0f5')
 Insert.pack(pady=(20,5))
 Insert.config(font=('veranda',15))
 
-ISBN = Label(frame4,text='  ISBN',fg='black',bg='#fff0f5',font=('Times New Roman',20,'bold')).place(x=350,y=58)
-ISBN_input=Entry(frame4,width=50)#text input on screen
-ISBN_input.pack(ipady=4,pady=(10,5)) #ipady for height
+isbn = Label(frame4,text='  ISBN',fg='black',bg='#fff0f5',font=('Times New Roman',20,'bold')).place(x=350,y=58)
+isbn_input=Entry(frame4,width=50)#text input on screen
+isbn_input.pack(ipady=4,pady=(10,5)) #ipady for height
 
 book = Label(frame4,text='Book Name',fg='black',bg='#fff0f5',font=('Times New Roman',20,'bold')).place(x=330,y=98)
 book_input=Entry(frame4,width=50)#text input on screen
