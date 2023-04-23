@@ -47,10 +47,14 @@ VIEW=Label(frame2,text='VIEW ALL BOOKS',fg='white',bg='black',font=('Times New R
 #masla wapsi ka button multiplies
 
 def view1():
+    one_wapsi_button = 0
     def delete():
+        global one_wapsi_button
         one_wapsi_button = 1
         tree.destroy()
         hsb.destroy()
+        if one_wapsi_button == 1:
+            frame2_btn.destroy()
     lst=cat.inorder()
     tree=ttk.Treeview(frame2)
     s=ttk.Style(frame2)
@@ -60,7 +64,8 @@ def view1():
         count+=1
     frame2_btn = tk.Button(frame2, text='Wapsi',command=lambda:[show_frame(frame1),delete()])
     frame2_btn.pack(fill='x', ipady=15)
-    s.theme_use('clam')
+    
+    s.theme_use('clam') 
     s.configure(".",font=('Helvetice',11))
     s.configure("Treeview.Heading",foreground='black',font=('Times New Roman',15))
     hsb=ttk.Scrollbar(frame2,orient='vertical')
@@ -80,6 +85,8 @@ def view1():
     tree.heading("Pages",text="Pages",anchor=CENTER)
     tree['show']='headings'
     tree.pack()
+
+
 #==================Frame 1 code
 
 
