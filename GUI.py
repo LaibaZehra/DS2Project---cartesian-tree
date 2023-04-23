@@ -28,9 +28,27 @@ frame4 = tk.Frame(window) #insert
 
 for frame in (frame1, frame2, frame3,frame4):
     frame.grid(row=0,column=0,sticky='nsew')
+
+
+background2= Canvas(frame2,height = 0, width = 0)
+img22 = PhotoImage(file="wallpaper.png")
+background_label2 = Label(frame2,image=img22,bg="pink")
+background_label2.place(x=0,y=0,relwidth=1, relheight=1)
+background2.pack()
+
+
+
+
+VIEW=Label(frame2,text='VIEW ALL BOOKS',fg='white',bg='black',font=('Times New Roman',40,'bold')).place(x=400,y=100)
+
+
 #==================Frame 2 code
+
+#masla wapsi ka button multiplies
+
 def view1():
     def delete():
+        one_wapsi_button = 1
         tree.destroy()
         hsb.destroy()
     lst=cat.inorder()
@@ -50,9 +68,9 @@ def view1():
     tree.configure(xscrollcommand=hsb.set)
     hsb.pack(fill=Y,side=RIGHT)
     tree['columns']=("ISBN","Name","Category","Price","Pages")
-    tree.column("ISBN",width=500,anchor=CENTER)
-    tree.column("Name",width=100,anchor=CENTER)
-    tree.column("Category",width=100,anchor=CENTER)
+    tree.column("ISBN",width=100,anchor=CENTER)
+    tree.column("Name",width=400,anchor=CENTER)
+    tree.column("Category",width=300,anchor=CENTER)
     tree.column("Price",width=100,anchor=CENTER)
     tree.column("Pages",width=100,anchor=CENTER)
     tree.heading("ISBN",text="ISBN",anchor=CENTER)
@@ -66,44 +84,48 @@ def view1():
 
 
 background = Canvas(frame1,height = 200, width = 200)
-img = PhotoImage(file="wp.png")
+img = PhotoImage(file="wallpaper.png")
 background_label = Label(frame1,image=img,bg="pink")
 background_label.place(x=0,y=0,relwidth=1, relheight=1)
 background.pack()
 
-img2 = PhotoImage(file="pretty books.png")
-Label(frame1,image=img2,bg="pink").place(x=50,y=150)
+searchimg = PhotoImage(file="search button.png")
+Label(frame1,image=searchimg,bg="white").place(x=200,y=200)
 
-Heading=Label(frame1,text='Fries Library Management System',fg='DeepPink4',bg='LightPink1',font=('Times New Roman',24,'bold'))
+
+viewimg = PhotoImage(file="view button.png")
+Label(frame1,image=viewimg,bg="white").place(x=500,y=200)
+
+
+deleteimg = PhotoImage(file="insert.png")
+Label(frame1,image=deleteimg,bg="white").place(x=800,y=200)
+
+Heading=Label(frame1,text='Fries Library Management System',fg='white',bg='black',font=('Times New Roman',40,'bold'))
 
 Heading.pack() #print on the screen
-Heading.place(x=400,y=20)
+Heading.place(x=250,y=20)
 
-isbn=Label(frame1,text='ISBN ',fg='black',bg='#fff0f5')
-isbn.pack(pady=(20,5))
-isbn.place(x=500,y=200)
 
-isbn_input=Entry(frame1,width=50)#text input on screen
-isbn_input.pack(ipady=4,pady=(10,5)) #ipady for height
-isbn_input.place(x=600,y=200)
-
-frame1_btn = tk.Button(frame1, text='View',fg="black",bg="PaleTurquoise",font=('Times New Roman',24,'bold'),command=lambda:[show_frame(frame2),view1()])
+frame1_btn = tk.Button(frame1, text='View',fg="black",bg="sienna",font=('Times New Roman',24,'bold'),command=lambda:[show_frame(frame2),view1()])
 frame1_btn.pack(ipady=15)
-frame1_btn.place(x=600,y=300)
+frame1_btn.place(x=550,y=520)
 
-search_btn = tk.Button(frame1, text='Search',fg="black",bg="PaleTurquoise",font=('Times New Roman',24,'bold'),command=lambda:show_frame(frame3))
+search_btn = tk.Button(frame1, text='Search/Delete',fg="black",bg="sienna",font=('Times New Roman',24,'bold'),command=lambda:show_frame(frame3))
 search_btn.pack(ipady=15)
-search_btn.place(x=600,y=600)
+search_btn.place(x=195,y=520)
 
-insert_btn = tk.Button(frame1, text='Insert',fg="black",bg="PaleTurquoise",font=('Times New Roman',24,'bold'),command=lambda:show_frame(frame4))
+insert_btn = tk.Button(frame1, text='Insert',fg="black",bg="sienna",font=('Times New Roman',24,'bold'),command=lambda:show_frame(frame4))
 insert_btn.pack(ipady=15)
-insert_btn.place(x=600,y=400)
+insert_btn.place(x=850,y=520)
 
 
 window.title('Fries Management System') # heading of the window
 window.iconbitmap('icon.ico') #icon of the window
 
-#==================Frame 3 code
+#==================Frame 2 code
+
+
+
 def search_func():
     value=search_input.get()
     print("New Key: ",value)
@@ -121,9 +143,9 @@ def search_func():
     tree1.configure(xscrollcommand=hsb1.set)
     hsb1.pack(fill=Y,side=RIGHT)
     tree1['columns']=("ISBN","Name","Category","Price","Pages")
-    tree1.column("ISBN",width=500,anchor=CENTER)
-    tree1.column("Name",width=100,anchor=CENTER)
-    tree1.column("Category",width=100,anchor=CENTER)
+    tree1.column("ISBN",width=100,anchor=CENTER)
+    tree1.column("Name",width=400,anchor=CENTER)
+    tree1.column("Category",width=300,anchor=CENTER)
     tree1.column("Price",width=100,anchor=CENTER)
     tree1.column("Pages",width=100,anchor=CENTER)
     tree1.heading("ISBN",text="ISBN",anchor=CENTER)
@@ -141,27 +163,42 @@ def search_func():
         tree1.destroy()
         hsb1.destroy()
         s_btn['state'] = 'normal'
-    clear_btn = tk.Button(frame3, text='clear',command=clear_all)
+    clear_btn = tk.Button(frame3, text='clear',command=clear_all,bg='sienna',font=('Times New Roman',25,'bold'),fg='black')
     clear_btn.pack(fill='x', ipady=15)
-    clear_btn.place(x=600,y=500)
-    delete_btn = tk.Button(frame3, text='delete',command=delete)
+    clear_btn.place(x=500,y=450)
+    delete_btn = tk.Button(frame3, text='delete',command=delete,bg='sienna',font=('Times New Roman',25,'bold'),fg='black')
     delete_btn.pack(fill='x', ipady=15)
-    delete_btn.place(x=800,y=500)
+    delete_btn.place(x=700,y=450)
+
+bd = Canvas(frame3,height = 10, width = 10)
+img2 = PhotoImage(file="wallpaper.png")
+background_label2 = Label(frame3,image=img2,bg="pink")
+background_label2.place(x=0,y=0,relwidth=1, relheight=1)
+bd.pack()
     
-search=Label(frame3,text='Search ',fg='black',bg='#fff0f5')
+search=Label(frame3,text='Search',fg='white',bg='black',font=('Times New Roman',40,'bold'))
 search.pack(pady=(20,5))
-search.config(font=('veranda',15))
+
 search_input=Entry(frame3,width=50)#text input on screen
-search_input.pack(ipady=4,pady=(10,5)) #ipady for height
-s_btn = tk.Button(frame3, text='Search',command=search_func)
+search_input.pack(ipady=10,pady=(10,5)) #ipady for height
+
+
+s_btn = tk.Button(frame3, text='Search',command=search_func,bg='sienna1',font=('Times New Roman',22,'bold'),fg='black')
 s_btn.pack(fill='x', ipady=15)
 s_btn.place(x=200,y=500)
-back_btn = tk.Button(frame3, text='Back',command=lambda:show_frame(frame1))
+back_btn = tk.Button(frame3, text='Back',command=lambda:show_frame(frame1),bg='sienna1',font=('Times New Roman',22,'bold'),fg='black')
 back_btn.pack(fill='x', ipady=15)
 back_btn.place(x=1000,y=500)
 
 
 #==================Frame 4 code
+frame4_btn = tk.Button(frame4, text='Wapsi',command=lambda:show_frame(frame1))
+frame4_btn.pack(fill='x', ipady=15)
+bg = Canvas(frame4,height = 200, width = 200)
+img3 = PhotoImage(file="wallpaper.png")
+background_label2 = Label(frame4,image=img3,bg="pink")
+background_label2.place(x=0,y=0,relwidth=1, relheight=1)
+bg.pack()
 
 def insert_func():
     print("hi")
@@ -178,43 +215,45 @@ def insert_func():
     insertion = cat.insert(isbn, lst)
    
 
-    pass
 
-Insert=Label(frame4,text='INSERT',fg='black',bg='#fff0f5')
-Insert.pack(pady=(20,5))
-Insert.config(font=('veranda',15))
 
-isbn = Label(frame4,text='  ISBN',fg='black',bg='#fff0f5',font=('Times New Roman',20,'bold')).place(x=350,y=58)
+
+Insert=Label(frame4,text='INSERT BOOKS',fg='white',bg='black',font=('Times New Roman',40,'bold')).place(x=400,y=100)
+
+
+isbn = Label(frame4,text='ISBN:',fg='white',bg='black',font=('Times New Roman',25,'bold')).place(x=200,y=260)
 isbn_input=Entry(frame4,width=50)#text input on screen
-isbn_input.pack(ipady=4,pady=(10,5)) #ipady for height
+isbn_input.pack(ipady=10,pady=(10,5)) #ipady for height
 
-book = Label(frame4,text='Book Name',fg='black',bg='#fff0f5',font=('Times New Roman',20,'bold')).place(x=330,y=98)
+book = Label(frame4,text='Book Name:',fg='white',bg='black',font=('Times New Roman',25,'bold')).place(x=200,y=320)
 book_input=Entry(frame4,width=50)#text input on screen
-book_input.pack(ipady=4,pady=(10,5)) #ipady for height
+book_input.pack(ipady=10,pady=(10,10))#ipady for height
 
-genre = Label(frame4,text='Genre',fg='black',bg='#fff0f5',font=('Times New Roman',20,'bold')).place(x=350,y=138)
+genre = Label(frame4,text='Genre:',fg='white',bg='black',font=('Times New Roman',25,'bold')).place(x=200,y=380)
 genre_input=Entry(frame4,width=50)#text input on screen
-genre_input.pack(ipady=4,pady=(10,5)) #ipady for height
+genre_input.pack(ipady=10,pady=(10,5)) #ipady for height
 
-pgno = Label(frame4,text='Page Number',fg='black',bg='#fff0f5',font=('Times New Roman',20,'bold')).place(x=320,y=178)
+pgno = Label(frame4,text='Page Number:',fg='white',bg='black',font=('Times New Roman',25,'bold')).place(x=200,y=440)
 pgno_input=Entry(frame4,width=50)#text input on screen
-pgno_input.pack(ipady=4,pady=(10,5)) #ipady for height
+pgno_input.pack(ipady=10,pady=(10,5)) #ipady for height
 
-price = Label(frame4,text='Price',fg='black',bg='#fff0f5',font=('Times New Roman',20,'bold')).place(x=350,y=224)
+price = Label(frame4,text='Price:',fg='white',bg='black',font=('Times New Roman',25,'bold')).place(x=200,y=500)
 price_input=Entry(frame4,width=50)#text input on screen
-price_input.pack(ipady=4,pady=(10,5)) #ipady for height
+price_input.pack(ipady=10,pady=(10,5)) #ipady for height
 
 
 
 
-
-i_btn = tk.Button(frame4, text='INSERT',font=('Times New Roman',20,'bold'),command=insert_func)
+i_btn = tk.Button(frame4, text='INSERT',fg='black',bg='sienna1',font=('Times New Roman',20,'bold'),command=insert_func)
 i_btn.pack(ipady=10)
-i_btn.place(x=500,y=500)
+i_btn.place(x=550,y=550)
+
+b_btn = tk.Button(frame4, text='Back',fg='black',bg='sienna',font=('Times New Roman',30,'bold'),command=lambda:show_frame(frame1))
+b_btn.pack(ipady=10)
+b_btn.place(x=1090,y=550)
 
 
-frame4_btn = tk.Button(frame4, text='Wapsi',command=lambda:show_frame(frame1))
-frame4_btn.pack(fill='x', ipady=15)
+
 
 
 
