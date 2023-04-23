@@ -39,12 +39,10 @@ background2.pack()
 
 
 
-VIEW=Label(frame2,text='VIEW ALL BOOKS',fg='white',bg='black',font=('Times New Roman',40,'bold')).place(x=400,y=100)
 
 
 #==================Frame 2 code
 
-#masla wapsi ka button multiplies
 
 def view1():
     one_wapsi_button = 0
@@ -62,17 +60,21 @@ def view1():
     for i in lst:
         tree.insert('',count,text="",values=(i,lst[i][0],lst[i][1],lst[i][2],lst[i][3]))
         count+=1
-    frame2_btn = tk.Button(frame2, text='Wapsi',command=lambda:[show_frame(frame1),delete()])
-    frame2_btn.pack(fill='x', ipady=15)
+    frame2_btn = tk.Button(frame2, text='Back',fg='black',bg='sienna1',font=('Times New Roman',25,'bold'),command=lambda:[show_frame(frame1),delete()])
+    frame2_btn.place(x=600,y=200)
+    frame2_btn.pack()
+  
+    VIEW=Label(frame2,text='VIEW ALL BOOKS',fg='white',bg='black',font=('Times New Roman',30,'bold')).place(x=150,y=15)
     
     s.theme_use('clam') 
-    s.configure(".",font=('Helvetice',11))
-    s.configure("Treeview.Heading",foreground='black',font=('Times New Roman',15))
+    s.configure(".",font=('Times New Roman',12))
+    s.configure("Treeview.Heading",foreground='black',fg='white',bg='black',font=('Times New Roman',15))
     hsb=ttk.Scrollbar(frame2,orient='vertical')
     hsb.configure(command=tree.yview)
     tree.configure(xscrollcommand=hsb.set)
     hsb.pack(fill=Y,side=RIGHT)
     tree['columns']=("ISBN","Name","Category","Price","Pages")
+    tree.configure(height=26)
     tree.column("ISBN",width=100,anchor=CENTER)
     tree.column("Name",width=400,anchor=CENTER)
     tree.column("Category",width=300,anchor=CENTER)
@@ -85,7 +87,6 @@ def view1():
     tree.heading("Pages",text="Pages",anchor=CENTER)
     tree['show']='headings'
     tree.pack()
-
 
 #==================Frame 1 code
 
