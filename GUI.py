@@ -139,32 +139,34 @@ def search_func():
     value=search_input.get()
     print("New Key: ",value)
     ans=cat.search(value)
-    
-    tree1=ttk.Treeview(frame3)
-    s1=ttk.Style(frame3)
-    count=0
-    tree1.insert('',count,text="",values=(value,ans[0],ans[1],ans[2],ans[3]))
-    s1.theme_use('clam')
-    s1.configure(".",font=('Helvetice',11))
-    s1.configure("Treeview.Heading",foreground='black',font=('Times New Roman',15))
-    hsb1=ttk.Scrollbar(frame2,orient='vertical')
-    hsb1.configure(command=tree1.yview)
-    tree1.configure(xscrollcommand=hsb1.set)
-    hsb1.pack(fill=Y,side=RIGHT)
-    tree1['columns']=("ISBN","Name","Category","Price","Pages")
-    tree1.column("ISBN",width=100,anchor=CENTER)
-    tree1.column("Name",width=400,anchor=CENTER)
-    tree1.column("Category",width=300,anchor=CENTER)
-    tree1.column("Price",width=100,anchor=CENTER)
-    tree1.column("Pages",width=100,anchor=CENTER)
-    tree1.heading("ISBN",text="ISBN",anchor=CENTER)
-    tree1.heading("Name",text="Name",anchor=CENTER)
-    tree1.heading("Category",text="Category",anchor=CENTER)
-    tree1.heading("Price",text="Price",anchor=CENTER)
-    tree1.heading("Pages",text="Pages",anchor=CENTER)
-    tree1['show']='headings'
-    tree1.pack()
-    s_btn['state'] = 'disabled'
+    if (ans == None):
+        messagebox.showinfo("Message","Record not found!")
+    else:
+        tree1=ttk.Treeview(frame3)
+        s1=ttk.Style(frame3)
+        count=0
+        tree1.insert('',count,text="",values=(value,ans[0],ans[1],ans[2],ans[3]))
+        s1.theme_use('clam')
+        s1.configure(".",font=('Helvetice',11))
+        s1.configure("Treeview.Heading",foreground='black',font=('Times New Roman',15))
+        hsb1=ttk.Scrollbar(frame2,orient='vertical')
+        hsb1.configure(command=tree1.yview)
+        tree1.configure(xscrollcommand=hsb1.set)
+        hsb1.pack(fill=Y,side=RIGHT)
+        tree1['columns']=("ISBN","Name","Category","Price","Pages")
+        tree1.column("ISBN",width=100,anchor=CENTER)
+        tree1.column("Name",width=400,anchor=CENTER)
+        tree1.column("Category",width=300,anchor=CENTER)
+        tree1.column("Price",width=100,anchor=CENTER)
+        tree1.column("Pages",width=100,anchor=CENTER)
+        tree1.heading("ISBN",text="ISBN",anchor=CENTER)
+        tree1.heading("Name",text="Name",anchor=CENTER)
+        tree1.heading("Category",text="Category",anchor=CENTER)
+        tree1.heading("Price",text="Price",anchor=CENTER)
+        tree1.heading("Pages",text="Pages",anchor=CENTER)
+        tree1['show']='headings'
+        tree1.pack()
+        s_btn['state'] = 'disabled'
     def delete():
         
         msg_box = tk.messagebox.askquestion('Confirmation', 'Are you sure you want to delete this record?',
