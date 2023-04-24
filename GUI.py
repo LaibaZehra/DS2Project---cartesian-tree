@@ -245,9 +245,13 @@ def insert_func():
        i_btn['state'] = 'normal'
        insert_func()
     else:
-        lst=[book,genre,price,pgno]
-        cat.insert(isbn, lst)
-        messagebox.showinfo("Message", "You have added a record.")
+        ans=cat.search(isbn)
+        if ans==None:
+            lst=[book,genre,price,pgno]
+            cat.insert(isbn, lst)
+            messagebox.showinfo("Message", "You have added a record.")
+        else:
+           messagebox.showinfo("Message", "The book has already been added.") 
 
 
 
@@ -281,8 +285,14 @@ price_input.pack(ipady=10,pady=(10,5)) #ipady for height
 i_btn = tk.Button(frame4, text='INSERT',fg='black',bg='sienna1',font=('Times New Roman',20,'bold'),command=insert_func)
 i_btn.pack(ipady=10)
 i_btn.place(x=550,y=550)
-
-b_btn = tk.Button(frame4, text='Back',fg='black',bg='sienna',font=('Times New Roman',30,'bold'),command=lambda:show_frame(frame1))
+def empty():
+    print("in")
+    isbn_input.delete(0,END)
+    book_input.delete(0,END)
+    genre_input.delete(0,END)
+    pgno_input.delete(0,END)
+    price_input.delete(0,END)
+b_btn = tk.Button(frame4, text='Back',fg='black',bg='sienna',font=('Times New Roman',30,'bold'),command=lambda:[show_frame(frame1),empty()])
 b_btn.pack(ipady=10)
 b_btn.place(x=1090,y=550)
 
