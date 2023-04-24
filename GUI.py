@@ -222,13 +222,28 @@ def insert_func():
     genre = genre_input.get()
     pgno = pgno_input.get()
     price = price_input.get()
+    if (isbn==""):
+        messagebox.showinfo("Message", "Please enter the ISBN.")
+    if (book==""):
+        messagebox.showinfo("Message", "Please enter the book name.")
+    if (genre==""):
+        messagebox.showinfo("Message", "Please enter the genre.")
+    if (pgno==""):
+        messagebox.showinfo("Message", "Please enter the page number.")
+    if (price==""):
+        messagebox.showinfo("Message", "Please enter the price.")
+    i_btn['state'] = 'disabled'
+    
+    if (isbn=="" or book=="" or genre=="" or pgno=="" or price==""):
+       insert_func()
+    else:
+        insert()
   
-
-    lst=[book,genre,price,pgno]
-    print(lst)
-
-    insertion = cat.insert(isbn, lst)
-    messagebox.showinfo("Message", "You have added a record.")
+    def insert():
+        i_btn['state'] = 'disabled'
+        lst=[book,genre,price,pgno]
+        cat.insert(isbn, lst)
+        messagebox.showinfo("Message", "You have added a record.")
 
 
 
