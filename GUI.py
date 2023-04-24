@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
+from tkinter import messagebox
 from PIL import ImageTk, Image
 from database import Table
 from Cartesiantree import CartesianTree
@@ -165,8 +166,15 @@ def search_func():
     tree1.pack()
     s_btn['state'] = 'disabled'
     def delete():
-        cat.delete(value)
-        clear_all()
+        
+        msg_box = tk.messagebox.askquestion('Confirmation', 'Are you sure you want to delete this record?',
+                                        icon='warning')
+        if msg_box == 'yes':
+            cat.delete(value)
+            clear_all()
+            messagebox.showinfo("Message", "You have deleted a record.")
+        # else:
+        #     tk.messagebox.showinfo('Return', 'You will now return to the application screen')
     def clear_all():
         tree1.destroy()
         hsb1.destroy()
@@ -209,7 +217,6 @@ background_label2.place(x=0,y=0,relwidth=1, relheight=1)
 bg.pack()
 
 def insert_func():
-    print("hi")
     isbn = isbn_input.get()
     book = book_input.get()
     genre = genre_input.get()
@@ -221,7 +228,7 @@ def insert_func():
     print(lst)
 
     insertion = cat.insert(isbn, lst)
-   
+    messagebox.showinfo("Message", "You have added a record.")
 
 
 
