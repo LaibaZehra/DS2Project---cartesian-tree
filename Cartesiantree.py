@@ -39,7 +39,7 @@ class CartesianTree:
             ans=self.find(value)
             if ans!=None:
                 return ans.data
-        return None
+            return None
     
     def find_value(self,root, value):
         if root is None:
